@@ -31,3 +31,10 @@ jobs:
           with:
             name: Mocha-Test-Result
             path: test-results.xml
+            # dev-deploy job
+integration-test:
+      needs: dev-deploy
+      uses: ./.github/workflows/reusable-workflow.yml
+      with:
+        ingress-url: ${{ needs.dev-deploy.outputs.APP_INGRESS_URL }}
+# next job
